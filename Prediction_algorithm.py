@@ -2,13 +2,19 @@ from sklearn.ensemble import RandomForestClassifier
 import scipy.io
 import numpy as np
 import pickle
+from string import atoi
+
+def toStr(s):
+    return s and chr(atoi(s[:2], base=16)) + toStr(s[2:]) or ''
+
 filename = 'Forest_model.sav'
 loaded_model = pickle.load(open(filename, 'rb'))
 print '\nWelcome to the prediction tool: please use points in decimal numbers (3.7 and not 3,7)'
 print'-------------------------\n'
 for i in [1,2,3]:
     Password = raw_input('Please insert password and press enter:\n')
-    if Password == 'MicroAPA_JBAB':
+    s = "4d6963726f4150415f4a424142"
+    if Password == toStr(s):
         Steroids= ['Aldosterone [ng/mL]',
                 '18-Oxocortisol [ng/mL]',
                 '18-Hydroxycortisol [ng/mL]',
